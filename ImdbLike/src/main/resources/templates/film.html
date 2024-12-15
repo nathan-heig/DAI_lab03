@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du film</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 th:text="${film.titre}"></h1>
+        <p><strong>Date de sortie:</strong> <span th:text="${#dates.format(film.date, 'yyyy-MM-dd')}"></span></p>
+        <p><strong>Synopsis:</strong> <span th:text="${film.synopsis}"></span></p>
+        <p><strong>Durée:</strong> <span th:text="${film.duree}"></span> minutes</p>
+        <p><strong>Genre:</strong> <span th:text="${film.genre}"></span></p>
+        <p><strong>Affiche:</strong></p>
+        <img th:src="'data:image/jpeg;base64,' + ${@filmController.encodeToBase64(film.affiche)}" alt="Affiche du film" width="200"/>
+        <br><br>
+        <a href="/films"><button>Retour à la liste des films</button></a>
+    </div>
+</body>
+</html>
