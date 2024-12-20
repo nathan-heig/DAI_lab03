@@ -1,0 +1,113 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    background-color: #181818;
+    color: #fff;
+}
+
+.sidebar {
+    width: 100px;
+    background-color: #222;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100vh;
+}
+
+.sidebar .user-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar .avatar {
+    width: 50px;
+    height: 50px;
+    background-color: #555;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    margin: 0 auto 10px;
+}
+
+.sidebar .menu a {
+    color: #ddd;
+    text-decoration: none;
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    display: block;
+    border-radius: 5px;
+}
+
+.sidebar .menu a:hover, .sidebar .menu a.active {
+    background-color: #444;
+    color: #fff;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+header .filters button {
+    background-color: #444;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+header .filters button:hover {
+    background-color: #555;
+}
+
+.movie-section {
+    margin-bottom: 40px;
+}
+
+.movie-section h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.movie-card {
+    background-color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.movie-card img {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.movie-card p {
+    margin: 0;
+    font-size: 14px;
+}

@@ -23,7 +23,7 @@ public class Film extends Media {
         this.genre = genre;
     }
 
-    // Getters et setters
+    // Getters et setters 
     public String getSynopsis() {
         return synopsis;
     }

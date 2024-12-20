@@ -19,7 +19,5 @@ public class FilmService {
         return filmRepository.findById(id).orElse(null);
     }
 
-    public void addFilm(Film film) {
-        filmRepository.save(film);
-    }
+
 }

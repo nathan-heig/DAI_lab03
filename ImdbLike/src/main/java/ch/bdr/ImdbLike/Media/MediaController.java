@@ -28,6 +28,11 @@ public class MediaController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
     }
 
+    @GetMapping("/")
+    public String defaultRoute() {
+        return "dashboard";
+    }
+
     @GetMapping("/medias")
     public String listMedias(Model model) {
         model.addAttribute("medias", mediaService.getAllMedias());

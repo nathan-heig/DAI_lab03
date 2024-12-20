@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import ch.bdr.ImdbLike.Utils.Genre;
 import java.util.Date;
@@ -49,18 +48,6 @@ public class FilmController {
         return "addFilm";
     }
 
-    @PostMapping("/film")
-    public String addFilm(@RequestParam("title") String title,
-                          @RequestParam("releaseDate") Date releaseDate,
-                          @RequestParam("synopsis") String synopsis,
-                          @RequestParam("duree") Double duree,
-                          @RequestParam("genre") Genre genre,
-                          @RequestParam("poster") MultipartFile posterFile) throws IOException {
-        byte[] poster = posterFile.getBytes();
-        Film film = new Film(title, releaseDate, poster, synopsis, duree, genre);
-        filmService.addFilm(film);
-        return "redirect:/films";
-    }
 
     @GetMapping("/film/{id}")
     public String getFilm(Model model, @PathVariable int id) {
