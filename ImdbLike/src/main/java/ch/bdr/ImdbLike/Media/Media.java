@@ -2,17 +2,17 @@ package ch.bdr.ImdbLike.Media;
 
 import jakarta.persistence.*;
 import java.util.Date;
+import ch.bdr.ImdbLike.Utils.Genre;;
 
 @Entity
 public class Media {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     protected int id;
 
     protected Date date;
     protected String titre;
+    protected Genre genre;
 
-    @Lob
     protected byte[] affiche;
 
 
@@ -55,6 +55,14 @@ public class Media {
 
     public void setAffiche(byte[] affiche) {
         this.affiche = affiche;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    public Genre getGenre() {
+        return genre;
     }
 
 }

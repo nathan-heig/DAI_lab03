@@ -1,8 +1,11 @@
 package ch.bdr.ImdbLike.Utils;
 
 public enum Genre {
-    ACTION,
-    COMEDY,
-    DRAMA,
-    HORROR
+    scienceFiction, 
+    action, 
+    drame,
+    comedie, 
+    romance, 
+    thriller, 
+    fantastique
 }

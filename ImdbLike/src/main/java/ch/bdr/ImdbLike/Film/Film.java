@@ -9,14 +9,14 @@ import ch.bdr.ImdbLike.Utils.Genre;
 public class Film extends Media {
 
     protected String synopsis;
-    protected Double duree;
+    protected Integer duree;
 
     @Enumerated(EnumType.STRING)
     protected Genre genre;
 
     public Film() {}
 
-    public Film(String titre, Date date, byte[] affiche, String synopsis, Double duree, Genre genre) {
+    public Film(String titre, Date date, byte[] affiche, String synopsis, Integer duree, Genre genre) {
         super(titre, date, affiche);
         this.synopsis = synopsis;
         this.duree = duree;
@@ -32,11 +32,11 @@ public class Film extends Media {
         this.synopsis = synopsis;
     }
 
-    public Double getDuree() {
+    public Integer getDuree() {
         return duree;
     }
 
-    public void setDuree(Double duree) {
+    public void setDuree(Integer duree) {
         this.duree = duree;
     }
 
