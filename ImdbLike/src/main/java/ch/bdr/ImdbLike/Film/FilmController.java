@@ -17,7 +17,7 @@ public class FilmController {
 
     @GetMapping("/films")
     public String listFilms(Model model) {
-        model.addAttribute("medias", filmRepository.getAllMediaForList());
+        model.addAttribute("medias", filmRepository.getMediaIn("film"));
         String test = "film";
         model.addAttribute("name",test);
         return "medias";

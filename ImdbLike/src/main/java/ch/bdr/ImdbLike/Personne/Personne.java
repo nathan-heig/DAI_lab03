@@ -5,6 +5,7 @@ import java.util.Date;
 
 @Entity
 public class Personne {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id;
@@ -36,5 +37,18 @@ public class Personne {
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
+    }
+
+    public Date getDateNaissance() {
+        return dateNaissance;
+    }
+    public void setDateNaissance(Date dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id){
+        this.id = id;
     }
 }

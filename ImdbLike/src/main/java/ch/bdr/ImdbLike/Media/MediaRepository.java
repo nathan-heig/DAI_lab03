@@ -1,11 +1,8 @@
 package ch.bdr.ImdbLike.Media;
 
-import ch.bdr.ImdbLike.Film.Film;
-import ch.bdr.ImdbLike.Utils.Genre;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
@@ -21,70 +18,33 @@ public class MediaRepository {
     @Value("${spring.datasource.password}")
     protected String password;
 
-    public Optional<List<Media>> findByGenre(Genre genre) {
+
+    //selectionne les media qui sont dans une certaine table
+    public List<Media> getMediaIn(String tableName){
         List<Media> films = new ArrayList<>();
-        String sql = "SELECT * FROM film_view WHERE film_view.genre = ?";
+        String sql = "SELECT media.titre, media.affiche FROM " + tableName + " INNER JOIN media ON media.id = " + tableName + ".idMedia";
         
         try (Connection conn = DriverManager.getConnection(url, username, password);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             
-            stmt.setString(1, genre.toString());
             System.out.println(stmt);
             ResultSet rs = stmt.executeQuery();
             
             while (rs.next()) {
-                films.add(mapResultSetToFilm(rs));
+                Media media = new Media();
+                media.setTitle(rs.getString("titre"));
+                media.setAffichePath(rs.getString("affiche"));
+                films.add(media);
             }
-            return Optional.of(films);
+            return films;
             
         } catch (SQLException e) {
             e.printStackTrace();
-            return Optional.empty();
+            return null;
         }
     }
 
-    public Optional<Media> findById(int id) {
-        String sql = "SELECT * FROM film_view WHERE film_view.id = ?";
-        
-        try (Connection conn = DriverManager.getConnection(url, username, password);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
-            stmt.setInt(1, id);
-            System.out.println(stmt);
-            ResultSet rs = stmt.executeQuery();
-            
-            
-            if (rs.next()) {
-                return Optional.of(mapResultSetToFilm(rs));
-            }
-            return Optional.empty();
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return Optional.empty();
-        }
-    }
-
-    public List<Media> getAllMediaForList() {
-        List<Media> films = new ArrayList<>();
-        String sql = "SELECT * FROM film_view";
-        System.out.println(sql);
-        
-        try (Connection conn = DriverManager.getConnection(url, username, password);
-             Statement stmt = conn.createStatement()) {
-            
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                films.add(mapResultSetToFilm(rs));
-            }
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return films;
-    }
-
-    public int addMedia(Film film) throws SQLException {
+    public int addMedia(Media film) throws SQLException {
         String sqlMedia = "INSERT INTO media (titre, date, affiche) VALUES (?, ?, ?)";
         
         try (Connection conn = DriverManager.getConnection(url, username, password);
@@ -92,7 +52,7 @@ public class MediaRepository {
             
             stmtMedia.setString(1, film.getTitre());
             stmtMedia.setDate(2, new java.sql.Date(film.getDate().getTime()));
-            stmtMedia.setBytes(3, film.getAffiche());
+            stmtMedia.setString(3, film.getAffichePath());
             int affectedRowsMedia = stmtMedia.executeUpdate();
             
             if (affectedRowsMedia == 0) {
@@ -108,16 +68,6 @@ public class MediaRepository {
             }
         }
     
-    }
-
-    private Media mapResultSetToFilm(ResultSet rs) throws SQLException {
-        Media media = new Film();
-        media.setId(rs.getInt("id"));
-        media.setTitle(rs.getString("titre"));
-        media.setGenre(Genre.valueOf(rs.getString("genre")));
-        media.setDate(rs.getDate("date"));
-        media.setAffiche(rs.getBytes("affiche"));
-        return media;
     }
 
 }

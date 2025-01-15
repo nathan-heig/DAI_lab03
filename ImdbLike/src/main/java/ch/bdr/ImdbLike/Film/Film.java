@@ -11,12 +11,9 @@ public class Film extends Media {
     protected String synopsis;
     protected Integer duree;
 
-    @Enumerated(EnumType.STRING)
-    protected Genre genre;
-
     public Film() {}
 
-    public Film(String titre, Date date, byte[] affiche, String synopsis, Integer duree, Genre genre) {
+    public Film(String titre, Date date, String affiche, String synopsis, Integer duree, Genre genre) {
         super(titre, date, affiche);
         this.synopsis = synopsis;
         this.duree = duree;

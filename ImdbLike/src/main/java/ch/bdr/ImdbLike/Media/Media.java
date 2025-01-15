@@ -7,21 +7,24 @@ import ch.bdr.ImdbLike.Utils.Genre;;
 @Entity
 public class Media {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id;
 
     protected Date date;
     protected String titre;
     protected Genre genre;
 
-    protected byte[] affiche;
+    protected String affichePath;
+    protected int idSaga;
 
 
     public Media() {}
 
-    public Media(String title, Date date, byte[] affiche) {
+    public Media(String title, Date date, String affichePath) {
         this.titre = title;
         this.date = date;
-        this.affiche = affiche;
+        this.affichePath = affichePath;
     }
 
     // Getters et setters
@@ -49,12 +52,12 @@ public class Media {
         this.date = date;
     }
 
-    public byte[] getAffiche() {
-        return affiche;
+    public String getAffichePath() {
+        return affichePath;
     }
 
-    public void setAffiche(byte[] affiche) {
-        this.affiche = affiche;
+    public void setAffichePath(String affichePath) {
+        this.affichePath = affichePath;
     }
 
     public void setGenre(Genre genre) {

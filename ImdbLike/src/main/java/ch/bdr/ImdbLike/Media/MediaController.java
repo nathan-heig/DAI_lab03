@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
-
-import java.util.Base64;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class MediaController {
@@ -23,24 +20,14 @@ public class MediaController {
     }
 
     @GetMapping("/medias")
-    public String listMedias(Model model) {
-        model.addAttribute("medias", mediaRepository.getAllMediaForList());
-        model.addAttribute("name","media");
-        return "medias";
-    }
-
-    @GetMapping("/media/{id}")
-    public String getFilm(Model model, @PathVariable int id) {
-        Media media = mediaRepository.findById(id).orElse(null);
-        if (media == null) {
-            model.addAttribute("errorMessage", "Film not found");
-            return "error";
+    public String listMedias(Model model, HttpSession session) {
+        model.addAttribute("films", mediaRepository.getMediaIn("film"));
+        model.addAttribute("series", mediaRepository.getMediaIn("serie"));
+        //a implementer model.addAttribute("topRanked", model.addAttribute("films", mediaRepository.getTopRankedMedia()));
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            //model.addAttribute("forYou", mediaRepository.getForYouMedia(username));
         }
-        model.addAttribute("media", media);
-        return "media";
-    }
-
-    public String encodeToBase64(byte[] image) {
-        return Base64.getEncoder().encodeToString(image);
+        return "medias";
     }
 }

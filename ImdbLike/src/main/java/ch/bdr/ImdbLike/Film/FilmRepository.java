@@ -10,7 +10,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class FilmRepository extends MediaRepository{
+public class FilmRepository extends MediaRepository {
 
 
     public Optional<List<Film>> findFilmByGenre(Genre genre) {
@@ -57,25 +57,6 @@ public class FilmRepository extends MediaRepository{
         }
     }
 
-    public List<Film> findAllForListFilm() {
-        List<Film> films = new ArrayList<>();
-        String sql = "SELECT * FROM film_view";
-        System.out.println(sql);
-        
-        try (Connection conn = DriverManager.getConnection(url, username, password);
-             Statement stmt = conn.createStatement()) {
-            
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                films.add(mapResultSetToFilm(rs));
-            }
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return films;
-    }
-
     public Film addFilm(Film film) {
         String sqlFilm = "INSERT INTO film (idMedia, synopsis, duree) VALUES (?, ?, ?)";
         
@@ -117,7 +98,7 @@ public class FilmRepository extends MediaRepository{
         film.setSynopsis(rs.getString("synopsis"));
         film.setGenre(Genre.valueOf(rs.getString("genre")));
         film.setDate(rs.getDate("date"));
-        film.setAffiche(rs.getBytes("affiche"));
+        film.setAffichePath(rs.getString("affiche"));
         film.setDuree(rs.getInt("duree"));
         return film;
     }
