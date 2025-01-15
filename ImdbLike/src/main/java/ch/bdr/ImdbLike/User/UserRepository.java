@@ -18,8 +18,8 @@ public class UserRepository {
     @Value("${spring.datasource.password}")
     private String password;
 
-    public Optional<User> findByPseudo(String pseudo) {
-        String sql = "SELECT * FROM users WHERE pseudo = ?";
+    public Optional<Utilisateur> findByPseudo(String pseudo) {
+        String sql = "SELECT * FROM utilisateur WHERE pseudo = ?";
         
         try (Connection conn = DriverManager.getConnection(url, username, password);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -38,15 +38,15 @@ public class UserRepository {
         }
     }
 
-    public User addUser(User user) {
-        String sql = "INSERT INTO users (pseudo, password, email) VALUES (?, ?, ?)";
+    public Utilisateur addUser(Utilisateur user) {
+        String sql = "INSERT INTO Utilisateur (pseudo, mdp, mail) VALUES (?, ?, ?)";
         
         try (Connection conn = DriverManager.getConnection(url, username, password);
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             
             stmt.setString(1, user.getPseudo());
-            stmt.setString(2, user.getPassword());
-            stmt.setString(3, user.getEmail());
+            stmt.setString(2, user.getMdp());
+            stmt.setString(3, user.getMail());
             int affectedRows = stmt.executeUpdate();
             
             if (affectedRows == 0) {
@@ -67,11 +67,11 @@ public class UserRepository {
         }
     }
 
-    private User mapResultSetToUser(ResultSet rs) throws SQLException {
-        User user = new User();
+    private Utilisateur mapResultSetToUser(ResultSet rs) throws SQLException {
+        Utilisateur user = new Utilisateur();
         user.setPseudo(rs.getString("pseudo"));
-        user.setPassword(rs.getString("password"));
-        user.setEmail(rs.getString("email"));
+        user.setMdp(rs.getString("password"));
+        user.setMail(rs.getString("mail"));
         return user;
     }
 }

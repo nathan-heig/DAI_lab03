@@ -16,12 +16,12 @@ public class UserController {
 
     @GetMapping("/register")
     public String registerForm(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("utilisateur", new Utilisateur());
         return "register";
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute User user, Model model) {
+    public String register(@ModelAttribute Utilisateur user, Model model) {
         userRepository.addUser(user);
         return "redirect:/login";
     }
@@ -33,8 +33,8 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(@RequestParam String pseudo, @RequestParam String password, HttpSession session, Model model) {
-        Optional<User> user = userRepository.findByPseudo(pseudo);
-        if (user.isPresent() && user.get().getPassword().equals(password)) {
+        Optional<Utilisateur> user = userRepository.findByPseudo(pseudo);
+        if (user.isPresent() && user.get().getMdp().equals(password)) {
             session.setAttribute("user", user.get());
             return "redirect:/";
         } else {
