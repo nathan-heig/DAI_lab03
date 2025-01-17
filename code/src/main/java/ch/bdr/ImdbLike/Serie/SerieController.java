@@ -1,6 +1,7 @@
 package ch.bdr.ImdbLike.Serie;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,14 +17,27 @@ public class SerieController {
 
     // Create a new serie
     @PostMapping
-    public Serie createSerie(@RequestBody Serie serie) {
-        return serieRepository.save(serie);
+    public ResponseEntity<Serie> createSerie(@RequestBody Serie serie) {
+        try {
+            Serie savedSerie = serieRepository.save(serie);
+            return new ResponseEntity<>(savedSerie, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     // Get all series
     @GetMapping
-    public List<Serie> getAllSeries() {
-        return serieRepository.findAll();
+    public ResponseEntity<List<Serie>> getAllSeries() {
+        try {
+            List<Serie> series = serieRepository.findAll();
+            if (series.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(series, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     // Get a single serie by ID
@@ -31,9 +45,9 @@ public class SerieController {
     public ResponseEntity<Serie> getSerieById(@PathVariable int id) {
         Optional<Serie> serie = serieRepository.findById(id);
         if (serie.isPresent()) {
-            return ResponseEntity.ok(serie.get());
+            return new ResponseEntity<>(serie.get(), HttpStatus.OK);
         } else {
-            return ResponseEntity.notFound().build();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -46,22 +60,25 @@ public class SerieController {
             updatedSerie.setTitre(serieDetails.getTitre());
             updatedSerie.setDate(serieDetails.getDate());
             updatedSerie.setGenre(serieDetails.getGenre());
-            serieRepository.save(updatedSerie);
-            return ResponseEntity.ok(updatedSerie);
+            return new ResponseEntity<>(serieRepository.save(updatedSerie), HttpStatus.OK);
         } else {
-            return ResponseEntity.notFound().build();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     // Delete a serie
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteSerie(@PathVariable int id) {
-        Optional<Serie> serie = serieRepository.findById(id);
-        if (serie.isPresent()) {
-            serieRepository.delete(serie.get());
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<HttpStatus> deleteSerie(@PathVariable int id) {
+        try {
+            Optional<Serie> serie = serieRepository.findById(id);
+            if (serie.isPresent()) {
+                serieRepository.delete(serie.get());
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
