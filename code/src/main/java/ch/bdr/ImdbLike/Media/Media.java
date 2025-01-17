@@ -2,7 +2,6 @@ package ch.bdr.ImdbLike.Media;
 
 import jakarta.persistence.*;
 import java.util.Date;
-import ch.bdr.ImdbLike.Utils.Genre;;
 
 @Entity
 public class Media {
@@ -13,19 +12,12 @@ public class Media {
 
     protected Date date;
     protected String titre;
-    protected Genre genre;
+    protected String genre;
 
-    protected String affichePath;
-    protected int idSaga;
 
 
     public Media() {}
 
-    public Media(String title, Date date, String affichePath) {
-        this.titre = title;
-        this.date = date;
-        this.affichePath = affichePath;
-    }
 
     // Getters et setters
     public int getId() {
@@ -40,7 +32,7 @@ public class Media {
         return titre;
     }
 
-    public void setTitle(String titre) {
+    public void setTitre(String titre) {
         this.titre = titre;
     }
 
@@ -52,19 +44,11 @@ public class Media {
         this.date = date;
     }
 
-    public String getAffichePath() {
-        return affichePath;
-    }
-
-    public void setAffichePath(String affichePath) {
-        this.affichePath = affichePath;
-    }
-
-    public void setGenre(Genre genre) {
+    public void setGenre(String genre) {
         this.genre = genre;
     }
 
-    public Genre getGenre() {
+    public String getGenre() {
         return genre;
     }
 

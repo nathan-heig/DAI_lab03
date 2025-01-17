@@ -2,8 +2,6 @@ package ch.bdr.ImdbLike.Film;
 
 import jakarta.persistence.*;
 import ch.bdr.ImdbLike.Media.Media;
-import java.util.Date;
-import ch.bdr.ImdbLike.Utils.Genre;
 
 @Entity
 public class Film extends Media {
@@ -12,13 +10,6 @@ public class Film extends Media {
     protected Integer duree;
 
     public Film() {}
-
-    public Film(String titre, Date date, String affiche, String synopsis, Integer duree, Genre genre) {
-        super(titre, date, affiche);
-        this.synopsis = synopsis;
-        this.duree = duree;
-        this.genre = genre;
-    }
 
     // Getters et setters 
     public String getSynopsis() {
@@ -35,14 +26,6 @@ public class Film extends Media {
 
     public void setDuree(Integer duree) {
         this.duree = duree;
-    }
-
-    public Genre getGenre() {
-        return genre;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
     }
 
 }
