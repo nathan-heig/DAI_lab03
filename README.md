@@ -43,6 +43,15 @@ Pour plus de détails sur l'API, consultez la [documentation complète](apiDoc.m
   ```
 
 
+## Créer une VM dans le cloud:
+Pour créer une VM dans le cloud, suivez les instructions disponibles [ici](https://github.com/heig-vd-dai-course/heig-vd-dai-course/blob/main/20-ssh-and-scp/COURSE_MATERIAL.md).
+
+
+## Acceder en SSH
+```sh
+ssh utilisateur@adresse_ip
+```
+dans notre cas ubuntu@agooddailab.duckdns.org ou ubuntu@108.143.148.74
 
 
 
@@ -154,3 +163,4 @@ Pour accéder à l'API, utilisez le sous-domaine `webapp.agooddailab.duckdns.org
 sudo docker compose up -d
 ```
 cette commande pull la dernieres version de la webapp java lance la web app et traefik.
+

@@ -35,7 +35,6 @@ services:
       - "traefik.http.routers.webapp.rule=Host(`webapp.agooddailab.duckdns.org`)"
       - "traefik.http.routers.webapp.entrypoints=websecure"
       - "traefik.http.routers.webapp.tls.certresolver=mytlschallenge"
-      - "traefik.http.routers.webapp.middlewares=cache"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/bdr
       - SPRING_DATASOURCE_USERNAME=postgres
