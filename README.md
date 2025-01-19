@@ -79,7 +79,14 @@ Address: 108.143.148.74
 ```
 
 
+## Pour deployer le container
+```sh
+sudo docker compose up -d
+```
+cette commande pull la dernieres version de la webapp java lance la web app et traefik à prtir du DockerCompose présent dans le dossier Docker.
 
+## Accès à l'API et au Dashboard Traefik
+Pour accéder à l'API, utilisez le sous-domaine `webapp.agooddailab.duckdns.org`. Pour accéder au dashboard de Traefik, utilisez `traefik.agooddailab.duckdns.org`.
 
 # Démo
 ## Pour les Films
@@ -178,15 +185,3 @@ Supprimer une série:
 ```sh
 curl -X DELETE https://webapp.agooddailab.duckdns.org/api/series/1
 ```
-
-## Accès à l'API et au Dashboard Traefik
-
-Pour accéder à l'API, utilisez le sous-domaine `webapp.agooddailab.duckdns.org`. Pour accéder au dashboard de Traefik, utilisez `traefik.agooddailab.duckdns.org`.
-
-
-## Pour deployer le container
-```sh
-sudo docker compose up -d
-```
-cette commande pull la dernieres version de la webapp java lance la web app et traefik.
-
