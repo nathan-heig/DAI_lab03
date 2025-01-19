@@ -217,3 +217,14 @@ Supprimer une série.
 - `204 (No Content)` - La série a été supprimée avec succès
 - `404 (Not Found)` - La série avec l'ID spécifié n'a pas été trouvée
 - `500 (Internal Server Error)` - Une erreur interne du serveur s'est produitemdbLike
+
+## Examples
+
+### Exemple films :
+<img src="./images/FilmUML.png" alt="Serie 1 example" width="400">
+
+<img src="./images/InterstellarUML.png" alt="Serie 1 example" width="400">
+
+
+### Exemple series :
+<img src="./images/SerieUML.png" alt="Serie 1 example" width="400">

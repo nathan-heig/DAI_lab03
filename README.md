@@ -6,7 +6,7 @@
 
 L'API ImdbLike permet de gérer les films et les séries disponibles dans la base de données ImdbLike. Elle utilise le protocole HTTP sur le port `8080`.
 
-Pour plus de détails sur l'API, consultez la [documentation complète](./apidDoc.md).
+Pour plus de détails sur l'API, consultez la [documentation complète](apiDoc.md).
 
 ## Installation
 
@@ -30,9 +30,20 @@ Pour plus de détails sur l'API, consultez la [documentation complète](./apidDo
 4. (Optionnel) Construisez et exécutez l'application avec Docker :
     ```sh
     cd ..
-    docker build -t imdb-like .
-    docker run -p 8080:8080 imdb-like
+    docker build -t webapp .
+    docker run -p 8080:8080 webapp
     ```
+
+5. Pour push pull le docker
+  ```sh
+    docker build -t votre_nom_utilisateur/webapp:latest .
+    docker login
+    docker push votre_nom_utilisateur/webapp:latest
+    docker pull votre_nom_utilisateur/webapp:latest
+  ```
+
+
+
 
 
 # Démo
