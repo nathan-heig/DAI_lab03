@@ -54,6 +54,32 @@ ssh utilisateur@adresse_ip
 dans notre cas ubuntu@agooddailab.duckdns.org ou ubuntu@108.143.148.74
 
 
+## Configurations DNS
+DuckDNS est un service gratuit qui permet de créer des noms de domaine dynamiques. Voici les étapes pour configurer un DNS avec DuckDNS :
+
+1. **Créer un compte DuckDNS** :
+  - Rendez-vous sur [duckdns.org](https://www.duckdns.org).
+  - Connectez-vous avec votre compte Google, GitHub, Twitter ou Reddit.
+
+2. **Ajouter une config** :
+  - Entrer le ne nom de sous domaine que vous voulez et liez le à l'adresse ip de votre VM
+
+3. **Verifiez que la configuration fonctionne** :
+```sh
+nslookup votre_sous_domaine.duckdns.org
+```
+Exemple de résultat :
+```text
+Server:		62.2.24.162
+Address:	62.2.24.162#53
+
+Non-authoritative answer:
+Name:	agooddailab.duckdns.org
+Address: 108.143.148.74
+```
+
+
+
 
 # Démo
 ## Pour les Films
